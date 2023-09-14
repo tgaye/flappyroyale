@@ -370,7 +370,7 @@ function gameLoop() {
     update();
     draw();
     frames++;
-
+    console.log(gameSpeed);
 
     if (frames % 1200 == 0 && gap > 80 && state.curr == 1) {
         if (pipe.pipes.length > 0 && !(bird.x >= pipe.pipes[0].x && bird.x <= pipe.pipes[0].x + pipe.top.sprite.width)) {
