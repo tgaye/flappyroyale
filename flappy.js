@@ -370,13 +370,10 @@ function gameLoop() {
     update();
     draw();
     frames++;
-    // console.log("game speed: " + gameSpeed);
-    console.log("gap: " + gap);
 
     if (frames % 1200 == 0 && gap > 80 && state.curr == 1) {
         if (pipe.pipes.length > 0 && !(bird.x >= pipe.pipes[0].x && bird.x <= pipe.pipes[0].x + pipe.top.sprite.width)) {
             gap -= 2; // Decrease gap size by 1
-            console.log(gap);
         }
     }
 

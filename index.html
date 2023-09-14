@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Flappy Bird</title>
-    <link rel="manifest" href="manifest.json">
     <style>
         body {
             background-color: black;
@@ -19,13 +18,33 @@
     </style>
 </head>
 <body>
-    <canvas id="canvasFlappy" width="600" height="600" style="transform: scale(1.3, 1.3);"></canvas>
+    <canvas id="canvasFlappy" width="600" height="600"></canvas>
     <script src="flappy.js"></script>
-    <button id="startButton">Start Game</button>
     <script>
         window.addEventListener('load', function() {
             // Call the gameLoop function to start the game
             gameLoop();
+            
+            // Check screen dimensions and update canvas scale accordingly
+            function updateCanvasScale() {
+                var canvas = document.getElementById('canvasFlappy');
+                var screenWidth = window.innerWidth;
+                var screenHeight = window.innerHeight;
+                
+                if (screenWidth > screenHeight) {
+                    canvas.style.transform = 'scale(1.3, 1.3)';
+                    console.log("desktop format")
+                } else {
+                    canvas.style.transform = 'scale(1.3, 1.9)';
+                    console.log("mobile format")
+                }
+            }
+            
+            // Call the updateCanvasScale function on window resize
+            window.addEventListener('resize', updateCanvasScale);
+            
+            // Call the updateCanvasScale function initially
+            updateCanvasScale();
         });
     </script>
     <script>
@@ -38,6 +57,6 @@
               console.log('Service Worker registration failed:', error);
             });
         }
-      </script>
+    </script>
 </body>
 </html>
