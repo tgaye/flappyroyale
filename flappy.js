@@ -364,9 +364,9 @@ SFX.score.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/score.wav
 SFX.hit.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/hit.wav?raw=true"
 SFX.die.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/die.wav?raw=true"
 
-gameLoop();
+let speedFactor = 1.15; // Adjust this value to control the animation speed
 
-function gameLoop() {
+function gameLoop(timestamp) {
     update();
     draw();
     frames++;
@@ -393,10 +393,16 @@ function gameLoop() {
         // Wait for a certain time before spawning the next pipe
         setTimeout(gameLoop, 100);
     } else {
-        // Call the gameLoop() function again after a delay of 6 milliseconds (approximately 60 frames per second)
-        setTimeout(gameLoop, gameSpeed);
+        // Calculate the delay based on the speedFactor
+        const delay = gameSpeed / speedFactor;
+        // Call the gameLoop() function again after a delay
+        requestAnimationFrame(gameLoop);
+        setTimeout(gameLoop, delay);
     }
 }
+
+// Start the game loop
+requestAnimationFrame(gameLoop);
 
 function update() {
     if (state.curr === state.Play) {
