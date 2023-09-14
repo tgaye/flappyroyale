@@ -364,12 +364,13 @@ SFX.score.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/score.wav
 SFX.hit.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/hit.wav?raw=true"
 SFX.die.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/die.wav?raw=true"
 
-animate();
+gameLoop();
 
-function animate() {
+function gameLoop() {
     update();
     draw();
     frames++;
+
 
     if (frames % 1200 == 0 && gap > 80 && state.curr == 1) {
         if (pipe.pipes.length > 0 && !(bird.x >= pipe.pipes[0].x && bird.x <= pipe.pipes[0].x + pipe.top.sprite.width)) {
@@ -390,10 +391,10 @@ function animate() {
     // Check if the last spawned pipe is too close to the current time
     if (pipe.pipes.length > 0 && frames - pipe.pipes[pipe.pipes.length - 1].spawnTime < 100) {
         // Wait for a certain time before spawning the next pipe
-        setTimeout(animate, 100);
+        setTimeout(gameLoop, 100);
     } else {
-        // Call the animate() function again on the next available frame
-        requestAnimationFrame(animate);
+        // Call the gameLoop() function again after a delay of 6 milliseconds (approximately 60 frames per second)
+        setTimeout(gameLoop, gameSpeed);
     }
 }
 
@@ -453,5 +454,20 @@ function handleVisibilityChange() {
     // ...
   }
 }
+
+// Function to handle screen resize and update gameSpeed
+function handleScreenResize() {
+    if (window.innerHeight > window.innerWidth) {
+        gameSpeed = 16;
+    } else {
+        gameSpeed = 6;
+    }
+}
+
+// Call the handleScreenResize function initially to handle the initial page load
+handleScreenResize();
+
+// Add event listener for window resize
+window.addEventListener('resize', handleScreenResize);
 
 
