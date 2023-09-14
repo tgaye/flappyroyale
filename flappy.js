@@ -461,19 +461,15 @@ function handleVisibilityChange() {
   }
 }
 
-// Function to handle screen resize and update gameSpeed
-function handleScreenResize() {
-    if (window.innerHeight > window.innerWidth) {
-        gameSpeed = 16;
-    } else {
-        gameSpeed = 6;
-    }
-}
+// function handleScreenResize() {
+//     if (window.innerHeight > window.innerWidth) {
+//         gameSpeed = 16;
+//     } else {
+//         gameSpeed = 6;
+//     }
+// }
 
-// Call the handleScreenResize function initially to handle the initial page load
-handleScreenResize();
-
-// Add event listener for window resize
-window.addEventListener('resize', handleScreenResize);
+// handleScreenResize();
+// window.addEventListener('resize', handleScreenResize);
 
 
