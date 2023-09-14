@@ -364,9 +364,9 @@ SFX.score.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/score.wav
 SFX.hit.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/hit.wav?raw=true"
 SFX.die.src = "https://github.com/CopeBears/AtariFiles/blob/main/sfx/die.wav?raw=true"
 
-gameLoop();
+animate();
 
-function gameLoop() {
+function animate() {
     update();
     draw();
     frames++;
@@ -390,10 +390,10 @@ function gameLoop() {
     // Check if the last spawned pipe is too close to the current time
     if (pipe.pipes.length > 0 && frames - pipe.pipes[pipe.pipes.length - 1].spawnTime < 100) {
         // Wait for a certain time before spawning the next pipe
-        setTimeout(gameLoop, 100);
+        setTimeout(animate, 100);
     } else {
-        // Call the gameLoop() function again after a delay of 6 milliseconds (approximately 60 frames per second)
-        setTimeout(gameLoop, gameSpeed);
+        // Call the animate() function again on the next available frame
+        requestAnimationFrame(animate);
     }
 }
 
